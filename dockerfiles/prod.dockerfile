@@ -10,8 +10,6 @@ COPY cmd ./cmd
 
 COPY pkg ./pkg
 
-COPY .air.toml ./
-
 COPY main.go ./
 
 COPY migrate.go ./
