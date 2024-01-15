@@ -21,7 +21,7 @@ jobs:
         run: go get .
       - name: Build Go 
         run: go build -o ./dist/main .  
-      - name: Bump version and push tag
+      - name: Version Tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.1
         with:
