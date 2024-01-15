@@ -21,6 +21,8 @@ jobs:
         run: go get .
       - name: Build Go 
         run: go build -o ./dist/main .
+      - name: echo github token
+        run: echo ${{secrets.GITHUB_TOKEN}}
       
   docker-build:
       runs-on: ubuntu-latest
