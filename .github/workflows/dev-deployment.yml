@@ -1,4 +1,4 @@
-name: Development
+name: dev-deployment
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 
 jobs:
-  development-env:
+  deployment:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,29 +21,17 @@ jobs:
         run: go get .
       - name: Build Go 
         run: go build -o ./dist/main .  
-      - name: Version Tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  
-      - name: Create A GitHub Release
-        uses: ncipollo/release-action@v1
-        with:
-          tag: ${{ steps.tag_version.outputs.new_tag }}
-          name: Release ${{ steps.tag_version.outputs.new_tag }}
-          body: ${{ steps.tag_version.outputs.changelog }}
-          artifacts: ./dist/main
 
   docker-build:
       runs-on: ubuntu-latest
-      needs: development-env
+      needs: deployment
       steps:
         - uses: actions/checkout@v4
         - name: Build Image
           uses: docker/build-push-action@v4
           with:
             context: .
-            file: Dockerfile
+            file: dockerfiles/dev.dockerfile
             push: false
         
 
