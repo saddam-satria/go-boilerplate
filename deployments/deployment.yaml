@@ -15,8 +15,27 @@ spec:
       containers:
       - name: go-boilerplate-container
         image: saddamsatria/go-boilerplate:v1
+        env: 
+          - name: DB_HOST
+            value: localhost
+          - name: DB_PORT
+            value: 5432 #postgres
+          - name: DB_USER
+            value: test
+          - name: DB_PASSWORD
+            value: test
+          - name: DB_DATABASE
+            value: test 
+          - name: SECRET_KEY
+            value: secret
+          - name: PORT 
+            value: 5000
+          - name: MIGRATE_SCRIPT
+            value: db:migrate 
+          - name: DEBUG 
+            value: false
         ports:
-        - containerPort: 80
+          - containerPort: 5000
 ---
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
