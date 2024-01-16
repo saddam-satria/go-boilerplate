@@ -39,6 +39,11 @@ jobs:
       needs: deployment
       steps:
         - uses: actions/checkout@v4
+        - name: Version Tag
+          id: tag_version
+          uses: mathieudutour/github-tag-action@v6.1
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}  
         - name: Build Image
           uses: docker/build-push-action@v4
           with:
