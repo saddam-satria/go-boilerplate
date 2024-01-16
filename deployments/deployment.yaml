@@ -14,7 +14,14 @@ spec:
     spec:
       containers:
       - name: go-boilerplate-container
-        image: saddamsatria/go-boilerplate:v1
+        image: saddamsatria/go-boilerplate:v0.0.11-prod.4
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi 
         env: 
           - name: DB_HOST
             value: localhost
@@ -36,20 +43,4 @@ spec:
             value: false
         ports:
           - containerPort: 5000
----
-apiVersion: autoscaling/v2beta2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: go-boilerplate-hpa
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: go-boilerplate
-  minReplicas: 3
-  maxReplicas: 10
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      targetAverageUtilization: 50
+
