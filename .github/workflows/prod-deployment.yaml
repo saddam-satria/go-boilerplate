@@ -3,7 +3,7 @@ name: prod-deployment
 on:
   push:
     branches:
-      - main
+      - prod
 
 
 jobs:
@@ -44,7 +44,8 @@ jobs:
           with:
             context: .
             file: dockerfiles/prod.dockerfile
-            push: false
+            push: true
+            tags: saddamsatria/go-boilerplate:${{steps.tag_version.outputs.new_tag}}:
         
 
 
