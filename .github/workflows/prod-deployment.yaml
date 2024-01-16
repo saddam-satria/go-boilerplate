@@ -45,7 +45,7 @@ jobs:
             context: .
             file: dockerfiles/prod.dockerfile
             push: true
-            tags: saddamsatria/go-boilerplate:${{steps.tag_version.outputs.new_tag}}:
+            tags: saddamsatria/go-boilerplate:${{steps.tag_version.outputs.new_tag}}
         
 
 
