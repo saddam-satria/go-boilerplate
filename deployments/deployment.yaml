@@ -26,7 +26,7 @@ spec:
           - name: DB_HOST
             value: localhost
           - name: DB_PORT
-            value: 5432 #postgres
+            value: "5432" #postgres
           - name: DB_USER
             value: test
           - name: DB_PASSWORD
@@ -36,11 +36,11 @@ spec:
           - name: SECRET_KEY
             value: secret
           - name: PORT 
-            value: 5000
+            value: "5000"
           - name: MIGRATE_SCRIPT
             value: db:migrate 
           - name: DEBUG 
-            value: false
+            value: "false"
         ports:
           - containerPort: 5000
 
