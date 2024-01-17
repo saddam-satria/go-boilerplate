@@ -24,17 +24,35 @@ spec:
             memory: 256Mi 
         env: 
           - name: DB_HOST
-            value: localhost
+            valueFrom:
+                configMapKeyRef:
+                    name: go-config
+                    key: DB_HOST
           - name: DB_PORT
-            value: "5432" #postgres
+            valueFrom:
+                configMapKeyRef:
+                    name: go-config
+                    key: DB_PORT
           - name: DB_USER
-            value: test
+            valueFrom:
+                secretKeyRef:
+                    name: go-db-secret
+                    key: DB_USERNAME
           - name: DB_PASSWORD
-            value: test
+            valueFrom:
+                secretKeyRef:
+                    name: go-db-secret
+                    key: DB_PASSWORD
           - name: DB_DATABASE
-            value: test 
+            valueFrom:
+                secretKeyRef:
+                    name: go-db-secret
+                    key: DB_DATABASE
           - name: SECRET_KEY
-            value: secret
+            valueFrom:
+                secretKeyRef:
+                    name: go-db-secret
+                    key: SECRET_KEY
           - name: PORT 
             value: "5000"
           - name: MIGRATE_SCRIPT

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres-container
+        image: postgres:14-alpine
+        env:
+          - name: POSTGRES_USER
+            valueFrom:
+                secretKeyRef:
+                    name: go-db-secret
+                    key: DB_USERNAME
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+                secretKeyRef:
+                    name: go-db-secret
+                    key: DB_PASSWORD
+          - name: POSTGRES_DB
+            valueFrom:
+                secretKeyRef:
+                    name: go-db-secret
+                    key: DB_DATABASE
+        ports:
+          - containerPort: 5432
+
