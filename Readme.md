@@ -1,13 +1,7 @@
 ## Go Boilerplate
 
-
-### Run Migration
-```
-go run . db:migrate
-```
-
-### Run Testing
+### How To Use
 
 ```
-go test -timeout 60s ./tests/...
+go run . OR air
 ```
